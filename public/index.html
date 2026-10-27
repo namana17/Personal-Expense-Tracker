@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledger — Personal Expense Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-mark" aria-hidden="true">₹</span>
+            <div>
+                <h1>Ledger</h1>
+                <p>Track your daily spending easily.</p>
+            </div>
+        </div>
+
+        <div class="total-badge" aria-live="polite">
+            <span class="total-label">Total expenses</span>
+            <span id="total" class="total-value">₹0.00</span>
+            <span id="totalCount" class="total-sub">0 entries</span>
+        </div>
+    </header>
+
+    <main class="dashboard">
+
+        <section class="stats" aria-label="Summary">
+            <article class="stat">
+                <span class="stat-label">This month</span>
+                <span id="statMonth" class="stat-value">₹0.00</span>
+            </article>
+            <article class="stat">
+                <span class="stat-label">Average expense</span>
+                <span id="statAvg" class="stat-value">₹0.00</span>
+            </article>
+            <article class="stat">
+                <span class="stat-label">Top category</span>
+                <span id="statTop" class="stat-value">—</span>
+            </article>
+        </section>
+
+        <section class="card expense-form">
+            <h2>Add new expense</h2>
+
+            <form id="expenseForm" novalidate>
+                <label for="title">Expense name</label>
+                <input type="text" id="title" maxlength="120"
+                       placeholder="e.g. Lunch" required>
+
+                <div class="row">
+                    <div>
+                        <label for="amount">Amount (₹)</label>
+                        <input type="number" id="amount" inputmode="decimal"
+                               placeholder="150"
+                               min="0.01" step="0.01" required>
+                    </div>
+                    <div>
+                        <label for="date">Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                </div>
+
+                <span class="label">Category</span>
+                <div class="chips" id="categoryChips" role="radiogroup" aria-label="Category"></div>
+
+                <p id="formError" class="form-error" role="alert"></p>
+                <button type="submit" id="submitBtn">Add expense</button>
+            </form>
+        </section>
+
+        <section class="card breakdown">
+            <h2>Spending by category</h2>
+            <ul id="breakdown" class="bars"></ul>
+        </section>
+
+        <section class="card expense-list">
+            <div class="list-head">
+                <h2>Your expenses</h2>
+                <div class="list-tools">
+                    <input type="search" id="search" placeholder="Search…" aria-label="Search expenses">
+                    <select id="filter" aria-label="Filter by category">
+                        <option value="">All categories</option>
+                    </select>
+                </div>
+            </div>
+            <ul id="expenses" class="items">
+                <li class="empty">Loading…</li>
+            </ul>
+            <p id="filteredTotal" class="filtered-total"></p>
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast" role="status"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
